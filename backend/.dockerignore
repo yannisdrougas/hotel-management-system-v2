@@ -1,0 +1,12 @@
+target/
+.git/
+.gitignore
+
+.idea/
+.vscode/
+
+*.iml
+*.log
+
+# Do not copy local database credentials into Docker image
+src/main/resources/application.properties
