@@ -6,7 +6,8 @@ import {
     Box,
     IconButton,
     Tooltip,
-    Paper
+    Paper,
+    Chip
 } from "@mui/material";
 
 import EditIcon from "@mui/icons-material/Edit";
@@ -115,25 +116,55 @@ function PaymentTable({
         },
 
         {
-            field: "paymentStatus",
-            headerName: "Status",
-            width: 130,
+    field: "paymentStatus",
+    headerName: "Status",
+    width: 140,
 
-            renderCell: (params) => (
+    renderCell: (params) => {
 
-                <Box
-                    sx={{
-                        fontWeight: "bold"
-                    }}
-                >
+        const status = params.value;
 
-                    {params.value}
+        let color = "default";
 
-                </Box>
+        switch (status) {
 
-            )
+            case "PAID":
+                color = "success";
+                break;
 
-        },
+            case "PENDING":
+                color = "warning";
+                break;
+
+            case "REFUNDED":
+                color = "info";
+                break;
+
+            case "FAILED":
+                color = "error";
+                break;
+
+            default:
+                color = "default";
+        }
+
+        return (
+
+            <Chip
+                label={status || "-"}
+                color={color}
+                size="small"
+                sx={{
+                    fontWeight: "bold",
+                    minWidth: 90
+                }}
+            />
+
+        );
+
+    }
+
+},
 
         {
             field: "actions",

@@ -6,7 +6,8 @@ import {
     Box,
     IconButton,
     Tooltip,
-    Paper
+    Paper,
+    Chip
 } from "@mui/material";
 
 import EditIcon from "@mui/icons-material/Edit";
@@ -108,33 +109,60 @@ function RoomTable({
 
 
         // =====================================================
-        // STATUS
-        // =====================================================
+		// STATUS
+		// =====================================================
 
-        {
-            field: "status",
-            headerName: "Status",
-            flex: 1,
-            minWidth: 140,
+{
+    field: "status",
+    headerName: "Status",
+    flex: 1,
+    minWidth: 150,
 
-            renderCell: (params) => {
+    renderCell: (params) => {
 
-                return (
+        const status = params.value;
 
-                    <Box
-                        sx={{
-                            fontWeight: "bold"
-                        }}
-                    >
-                        {params.value}
-                    </Box>
+        let color = "default";
 
-                );
+        switch (status) {
 
-            }
+            case "AVAILABLE":
+                color = "success";
+                break;
 
-        },
+            case "RESERVED":
+                color = "warning";
+                break;
 
+            case "OCCUPIED":
+                color = "error";
+                break;
+
+            case "MAINTENANCE":
+                color = "default";
+                break;
+
+            default:
+                color = "default";
+        }
+
+        return (
+
+            <Chip
+                label={status || "-"}
+                color={color}
+                size="small"
+                sx={{
+                    fontWeight: "bold",
+                    minWidth: 100
+                }}
+            />
+
+        );
+
+    }
+
+},
 
         // =====================================================
         // HOTEL

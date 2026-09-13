@@ -6,7 +6,8 @@ import {
     Box,
     IconButton,
     Tooltip,
-    Paper
+    Paper,
+    Chip
 } from "@mui/material";
 
 import EditIcon from "@mui/icons-material/Edit";
@@ -186,31 +187,65 @@ function ReservationTable({
 
 
         // =====================================================
-        // STATUS
-        // =====================================================
+// STATUS
+// =====================================================
 
-        {
-            field: "status",
-            headerName: "Status",
-            width: 140,
+{
+    field: "status",
+    headerName: "Status",
+    width: 150,
 
-            renderCell: (params) => {
+    renderCell: (params) => {
 
-                return (
-                    <Box
-                        sx={{
-                            fontWeight: "bold"
-                        }}
-                    >
+        const status = params.value;
 
-                        {params.value}
+        let color = "default";
 
-                    </Box>
-                );
+        switch (status) {
 
-            }
+            case "CONFIRMED":
+                color = "success";
+                break;
 
-        },
+            case "PENDING":
+                color = "warning";
+                break;
+
+            case "COMPLETED":
+                color = "info";
+                break;
+
+            case "CANCELLED":
+                color = "error";
+                break;
+
+            default:
+                color = "default";
+        }
+
+
+        return (
+
+            <Chip
+
+                label={status || "-"}
+
+                color={color}
+
+                size="small"
+
+                sx={{
+                    fontWeight: "bold",
+                    minWidth: 100
+                }}
+
+            />
+
+        );
+
+    }
+
+},
 
 
         // =====================================================
