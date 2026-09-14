@@ -1,8 +1,10 @@
 import {
+    Avatar,
     Box,
     Card,
     CardContent,
     Grid,
+    Stack,
     Typography
 } from "@mui/material";
 
@@ -36,6 +38,12 @@ import BedIcon from "@mui/icons-material/Bed";
 import BadgeIcon from "@mui/icons-material/Badge";
 import EventAvailableIcon from "@mui/icons-material/EventAvailable";
 import PaymentIcon from "@mui/icons-material/Payment";
+import CheckCircleIcon from "@mui/icons-material/CheckCircle";
+import CancelIcon from "@mui/icons-material/Cancel";
+import BuildIcon from "@mui/icons-material/Build";
+import MeetingRoomIcon from "@mui/icons-material/MeetingRoom";
+import ScheduleIcon from "@mui/icons-material/Schedule";
+import PaidIcon from "@mui/icons-material/Paid";
 
 import { PieChart } from "@mui/x-charts/PieChart";
 
@@ -65,39 +73,39 @@ function Dashboard() {
         useState(0);
 
     const [availableRoomCount, setAvailableRoomCount] =
-    useState(0);
+        useState(0);
 
-const [occupiedRoomCount, setOccupiedRoomCount] =
-    useState(0);
+    const [occupiedRoomCount, setOccupiedRoomCount] =
+        useState(0);
 
-const [
-    pendingReservationCount,
-    setPendingReservationCount
-] = useState(0);
+    const [
+        pendingReservationCount,
+        setPendingReservationCount
+    ] = useState(0);
 
-const [
-    confirmedReservationCount,
-    setConfirmedReservationCount
-] = useState(0);
+    const [
+        confirmedReservationCount,
+        setConfirmedReservationCount
+    ] = useState(0);
 
-const [totalRevenue, setTotalRevenue] =
-    useState(0);
+    const [totalRevenue, setTotalRevenue] =
+        useState(0);
 
-const [reservedRoomCount, setReservedRoomCount] =
-    useState(0);
+    const [reservedRoomCount, setReservedRoomCount] =
+        useState(0);
 
-const [maintenanceRoomCount, setMaintenanceRoomCount] =
-    useState(0);
+    const [maintenanceRoomCount, setMaintenanceRoomCount] =
+        useState(0);
 
-const [
-    completedReservationCount,
-    setCompletedReservationCount
-] = useState(0);
+    const [
+        completedReservationCount,
+        setCompletedReservationCount
+    ] = useState(0);
 
-const [
-    cancelledReservationCount,
-    setCancelledReservationCount
-] = useState(0);
+    const [
+        cancelledReservationCount,
+        setCancelledReservationCount
+    ] = useState(0);
 
 
     // =====================================================
@@ -125,239 +133,224 @@ const [
             ] = await Promise.all([
 
                 getCustomerCount(),
-
                 getHotelCount(),
-
                 getRoomCount(),
-
                 getEmployeeCount(),
-
                 getReservationCount(),
-
                 getPaymentCount()
 
             ]);
 
 
-            setCustomerCount(
-                customers
-            );
+            setCustomerCount(customers);
 
-            setHotelCount(
-                hotels
-            );
+            setHotelCount(hotels);
 
-            setRoomCount(
-                rooms
-            );
+            setRoomCount(rooms);
 
-            setEmployeeCount(
-                employees
-            );
+            setEmployeeCount(employees);
 
-            setReservationCount(
-                reservations
-            );
+            setReservationCount(reservations);
 
-            setPaymentCount(
-                payments
-            );
+            setPaymentCount(payments);
 
-// =================================================
-// AVAILABLE ROOMS
-// =================================================
 
-try {
+            // =================================================
+            // AVAILABLE ROOMS
+            // =================================================
 
-    const count =
-        await getAvailableRoomCount();
+            try {
 
-    setAvailableRoomCount(count);
+                const count =
+                    await getAvailableRoomCount();
 
-}
-catch (error) {
+                setAvailableRoomCount(count);
 
-    console.error(
-        "Failed to load available rooms count:",
-        error
-    );
+            }
+            catch (error) {
 
-}
+                console.error(
+                    "Failed to load available rooms count:",
+                    error
+                );
 
+            }
 
-// =================================================
-// OCCUPIED ROOMS
-// =================================================
 
-try {
+            // =================================================
+            // OCCUPIED ROOMS
+            // =================================================
 
-    const count =
-        await getOccupiedRoomCount();
+            try {
 
-    setOccupiedRoomCount(count);
+                const count =
+                    await getOccupiedRoomCount();
 
-}
-catch (error) {
+                setOccupiedRoomCount(count);
 
-    console.error(
-        "Failed to load occupied rooms count:",
-        error
-    );
+            }
+            catch (error) {
 
-}
+                console.error(
+                    "Failed to load occupied rooms count:",
+                    error
+                );
 
+            }
 
-// =================================================
-// PENDING RESERVATIONS
-// =================================================
 
-try {
+            // =================================================
+            // RESERVED ROOMS
+            // =================================================
 
-    const count =
-        await getPendingReservationCount();
+            try {
 
-    setPendingReservationCount(count);
+                const count =
+                    await getReservedRoomCount();
 
-}
-catch (error) {
+                setReservedRoomCount(count);
 
-    console.error(
-        "Failed to load pending reservations count:",
-        error
-    );
+            }
+            catch (error) {
 
-}
+                console.error(
+                    "Failed to load reserved rooms count:",
+                    error
+                );
 
+            }
 
-// =================================================
-// CONFIRMED RESERVATIONS
-// =================================================
 
-try {
+            // =================================================
+            // MAINTENANCE ROOMS
+            // =================================================
 
-    const count =
-        await getConfirmedReservationCount();
+            try {
 
-    setConfirmedReservationCount(count);
+                const count =
+                    await getMaintenanceRoomCount();
 
-}
-catch (error) {
+                setMaintenanceRoomCount(count);
 
-    console.error(
-        "Failed to load confirmed reservations count:",
-        error
-    );
+            }
+            catch (error) {
 
-}
+                console.error(
+                    "Failed to load maintenance rooms count:",
+                    error
+                );
 
+            }
 
-// =================================================
-// TOTAL REVENUE
-// =================================================
 
-try {
+            // =================================================
+            // PENDING RESERVATIONS
+            // =================================================
 
-    const revenue =
-        await getTotalRevenue();
+            try {
 
-    setTotalRevenue(revenue);
+                const count =
+                    await getPendingReservationCount();
 
-}
-catch (error) {
+                setPendingReservationCount(count);
 
-    console.error(
-        "Failed to load total revenue:",
-        error
-    );
+            }
+            catch (error) {
 
-}
+                console.error(
+                    "Failed to load pending reservations count:",
+                    error
+                );
 
-// =================================================
-// RESERVED ROOMS
-// =================================================
+            }
 
-try {
 
-    const count =
-        await getReservedRoomCount();
+            // =================================================
+            // CONFIRMED RESERVATIONS
+            // =================================================
 
-    setReservedRoomCount(count);
+            try {
 
-}
-catch (error) {
+                const count =
+                    await getConfirmedReservationCount();
 
-    console.error(
-        "Failed to load reserved rooms count:",
-        error
-    );
+                setConfirmedReservationCount(count);
 
-}
+            }
+            catch (error) {
 
+                console.error(
+                    "Failed to load confirmed reservations count:",
+                    error
+                );
 
-// =================================================
-// MAINTENANCE ROOMS
-// =================================================
+            }
 
-try {
 
-    const count =
-        await getMaintenanceRoomCount();
+            // =================================================
+            // COMPLETED RESERVATIONS
+            // =================================================
 
-    setMaintenanceRoomCount(count);
+            try {
 
-}
-catch (error) {
+                const count =
+                    await getCompletedReservationCount();
 
-    console.error(
-        "Failed to load maintenance rooms count:",
-        error
-    );
+                setCompletedReservationCount(count);
 
-}
+            }
+            catch (error) {
 
+                console.error(
+                    "Failed to load completed reservations count:",
+                    error
+                );
 
-// =================================================
-// COMPLETED RESERVATIONS
-// =================================================
+            }
 
-try {
 
-    const count =
-        await getCompletedReservationCount();
+            // =================================================
+            // CANCELLED RESERVATIONS
+            // =================================================
 
-    setCompletedReservationCount(count);
+            try {
 
-}
-catch (error) {
+                const count =
+                    await getCancelledReservationCount();
 
-    console.error(
-        "Failed to load completed reservations count:",
-        error
-    );
+                setCancelledReservationCount(count);
 
-}
+            }
+            catch (error) {
 
+                console.error(
+                    "Failed to load cancelled reservations count:",
+                    error
+                );
 
-// =================================================
-// CANCELLED RESERVATIONS
-// =================================================
+            }
 
-try {
 
-    const count =
-        await getCancelledReservationCount();
+            // =================================================
+            // TOTAL REVENUE
+            // =================================================
 
-    setCancelledReservationCount(count);
+            try {
 
-}
-catch (error) {
+                const revenue =
+                    await getTotalRevenue();
 
-    console.error(
-        "Failed to load cancelled reservations count:",
-        error
-    );
+                setTotalRevenue(revenue);
 
-}
+            }
+            catch (error) {
+
+                console.error(
+                    "Failed to load total revenue:",
+                    error
+                );
+
+            }
 
         }
         catch (error) {
@@ -373,7 +366,7 @@ catch (error) {
 
 
     // =====================================================
-    // DASHBOARD CARDS
+    // MAIN DASHBOARD CARDS
     // =====================================================
 
     const dashboardCards = [
@@ -381,79 +374,131 @@ catch (error) {
         {
             title: "Customers",
             value: customerCount,
-            icon: (
-                <PeopleIcon
-                    sx={{
-                        fontSize: 50
-                    }}
-                />
-            ),
-            color: "#1976d2"
+            icon: <PeopleIcon />,
+            color: "#1976d2",
+            background: "#e3f2fd"
         },
 
         {
             title: "Hotels",
             value: hotelCount,
-            icon: (
-                <HotelIcon
-                    sx={{
-                        fontSize: 50
-                    }}
-                />
-            ),
-            color: "#2e7d32"
+            icon: <HotelIcon />,
+            color: "#2e7d32",
+            background: "#e8f5e9"
         },
 
         {
             title: "Rooms",
             value: roomCount,
-            icon: (
-                <BedIcon
-                    sx={{
-                        fontSize: 50
-                    }}
-                />
-            ),
-            color: "#ef6c00"
+            icon: <BedIcon />,
+            color: "#ef6c00",
+            background: "#fff3e0"
         },
 
         {
             title: "Employees",
             value: employeeCount,
-            icon: (
-                <BadgeIcon
-                    sx={{
-                        fontSize: 50
-                    }}
-                />
-            ),
-            color: "#6a1b9a"
+            icon: <BadgeIcon />,
+            color: "#6a1b9a",
+            background: "#f3e5f5"
         },
 
         {
             title: "Reservations",
             value: reservationCount,
-            icon: (
-                <EventAvailableIcon
-                    sx={{
-                        fontSize: 50
-                    }}
-                />
-            ),
-            color: "#00838f"
+            icon: <EventAvailableIcon />,
+            color: "#00838f",
+            background: "#e0f7fa"
         },
 
         {
             title: "Payments",
             value: paymentCount,
-            icon: (
-                <PaymentIcon
-                    sx={{
-                        fontSize: 50
-                    }}
-                />
-            ),
-            color: "#c62828"
+            icon: <PaymentIcon />,
+            color: "#c62828",
+            background: "#ffebee"
+        }
+
+    ];
+
+
+    // =====================================================
+    // ROOM STATUS CARDS
+    // =====================================================
+
+    const roomStatistics = [
+
+        {
+            title: "Available",
+            value: availableRoomCount,
+            color: "#2e7d32",
+            background: "#e8f5e9",
+            icon: <CheckCircleIcon />
+        },
+
+        {
+            title: "Reserved",
+            value: reservedRoomCount,
+            color: "#ed6c02",
+            background: "#fff3e0",
+            icon: <ScheduleIcon />
+        },
+
+        {
+            title: "Occupied",
+            value: occupiedRoomCount,
+            color: "#d32f2f",
+            background: "#ffebee",
+            icon: <MeetingRoomIcon />
+        },
+
+        {
+            title: "Maintenance",
+            value: maintenanceRoomCount,
+            color: "#616161",
+            background: "#eeeeee",
+            icon: <BuildIcon />
+        }
+
+    ];
+
+
+    // =====================================================
+    // RESERVATION STATUS CARDS
+    // =====================================================
+
+    const reservationStatistics = [
+
+        {
+            title: "Pending",
+            value: pendingReservationCount,
+            color: "#ed6c02",
+            background: "#fff3e0",
+            icon: <ScheduleIcon />
+        },
+
+        {
+            title: "Confirmed",
+            value: confirmedReservationCount,
+            color: "#2e7d32",
+            background: "#e8f5e9",
+            icon: <CheckCircleIcon />
+        },
+
+        {
+            title: "Completed",
+            value: completedReservationCount,
+            color: "#0288d1",
+            background: "#e1f5fe",
+            icon: <EventAvailableIcon />
+        },
+
+        {
+            title: "Cancelled",
+            value: cancelledReservationCount,
+            color: "#c62828",
+            background: "#ffebee",
+            icon: <CancelIcon />
         }
 
     ];
@@ -467,23 +512,49 @@ catch (error) {
 
         <Box>
 
-            <Typography
-                variant="h4"
-                fontWeight="bold"
-                gutterBottom
-            >
-                Dashboard
-            </Typography>
+            {/* =================================================
+                HEADER
+            ================================================= */}
 
-
-            <Typography
-                variant="subtitle1"
-                color="text.secondary"
+            <Box
                 sx={{
                     mb: 4
                 }}
             >
-                Welcome to Hotel Management System
+
+                <Typography
+                    variant="h4"
+                    fontWeight="bold"
+                >
+                    Hotel Management Dashboard
+                </Typography>
+
+
+                <Typography
+                    variant="subtitle1"
+                    color="text.secondary"
+                    sx={{
+                        mt: 0.5
+                    }}
+                >
+                    Overview of hotel operations and statistics
+                </Typography>
+
+            </Box>
+
+
+            {/* =================================================
+                MAIN SUMMARY CARDS
+            ================================================= */}
+
+            <Typography
+                variant="h5"
+                fontWeight="bold"
+                sx={{
+                    mb: 2
+                }}
+            >
+                System Overview
             </Typography>
 
 
@@ -504,42 +575,40 @@ catch (error) {
                         >
 
                             <Card
-                                elevation={5}
+                                elevation={3}
                                 sx={{
-
-                                    borderLeft:
-                                        `6px solid ${card.color}`,
-
+                                    height: "100%",
                                     borderRadius: 3,
+                                    borderTop:
+                                        `4px solid ${card.color}`,
 
                                     transition:
-                                        "0.3s",
+                                        "transform 0.2s ease, box-shadow 0.2s ease",
 
                                     "&:hover": {
-
                                         transform:
-                                            "translateY(-5px)",
-
-                                        boxShadow: 8
-
+                                            "translateY(-4px)",
+                                        boxShadow: 6
                                     }
-
                                 }}
                             >
 
                                 <CardContent>
 
                                     <Box
-                                        display="flex"
-                                        justifyContent="space-between"
-                                        alignItems="center"
+                                        sx={{
+                                            display: "flex",
+                                            alignItems: "center",
+                                            justifyContent: "space-between"
+                                        }}
                                     >
 
                                         <Box>
 
                                             <Typography
-                                                variant="h6"
+                                                variant="body1"
                                                 color="text.secondary"
+                                                fontWeight={500}
                                             >
                                                 {card.title}
                                             </Typography>
@@ -548,6 +617,9 @@ catch (error) {
                                             <Typography
                                                 variant="h3"
                                                 fontWeight="bold"
+                                                sx={{
+                                                    mt: 0.5
+                                                }}
                                             >
                                                 {card.value}
                                             </Typography>
@@ -555,14 +627,21 @@ catch (error) {
                                         </Box>
 
 
-                                        <Box
+                                        <Avatar
                                             sx={{
-                                                color:
-                                                    card.color
+                                                width: 58,
+                                                height: 58,
+                                                color: card.color,
+                                                backgroundColor:
+                                                    card.background,
+
+                                                "& .MuiSvgIcon-root": {
+                                                    fontSize: 32
+                                                }
                                             }}
                                         >
                                             {card.icon}
-                                        </Box>
+                                        </Avatar>
 
                                     </Box>
 
@@ -572,592 +651,572 @@ catch (error) {
 
                         </Grid>
 
-                        
-
                     )
                 )}
 
             </Grid>
 
-{/* =============================================
-    OPERATIONAL STATISTICS
-================================================= */}
 
-<Typography
-    variant="h5"
-    fontWeight="bold"
-    sx={{
-        mt: 5,
-        mb: 2
-    }}
->
-    Operational Statistics
-</Typography>
+            {/* =================================================
+                TOTAL REVENUE
+            ================================================= */}
 
-
-<Grid
-    container
-    spacing={3}
->
-
-    {/* =================================================
-        AVAILABLE ROOMS
-    ================================================= */}
-
-    <Grid
-        item
-        xs={12}
-        sm={6}
-        md={4}
-    >
-
-        <Card
-            elevation={4}
-            sx={{
-                borderLeft: "6px solid #2e7d32",
-                borderRadius: 3
-            }}
-        >
-
-            <CardContent>
-
-                <Typography
-                    variant="h6"
-                    color="text.secondary"
-                >
-                    Available Rooms
-                </Typography>
-
-                <Typography
-                    variant="h3"
-                    fontWeight="bold"
-                >
-                    {availableRoomCount}
-                </Typography>
-
-            </CardContent>
-
-        </Card>
-
-    </Grid>
-
-
-    {/* =================================================
-        OCCUPIED ROOMS
-    ================================================= */}
-
-    <Grid
-        item
-        xs={12}
-        sm={6}
-        md={4}
-    >
-
-        <Card
-            elevation={4}
-            sx={{
-                borderLeft: "6px solid #d32f2f",
-                borderRadius: 3
-            }}
-        >
-
-            <CardContent>
-
-                <Typography
-                    variant="h6"
-                    color="text.secondary"
-                >
-                    Occupied Rooms
-                </Typography>
-
-                <Typography
-                    variant="h3"
-                    fontWeight="bold"
-                >
-                    {occupiedRoomCount}
-                </Typography>
-
-            </CardContent>
-
-        </Card>
-
-    </Grid>
-
-    {/* =================================================
-    RESERVED ROOMS
-================================================= */}
-
-<Grid
-    item
-    xs={12}
-    sm={6}
-    md={4}
->
-
-    <Card
-        elevation={4}
-        sx={{
-            borderLeft: "6px solid #1565c0",
-            borderRadius: 3
-        }}
-    >
-
-        <CardContent>
-
-            <Typography
-                variant="h6"
-                color="text.secondary"
+            <Card
+                elevation={4}
+                sx={{
+                    mt: 4,
+                    borderRadius: 3,
+                    overflow: "hidden",
+                    borderLeft: "6px solid #6a1b9a"
+                }}
             >
-                Reserved Rooms
-            </Typography>
 
-            <Typography
-                variant="h3"
-                fontWeight="bold"
-            >
-                {reservedRoomCount}
-            </Typography>
-
-        </CardContent>
-
-    </Card>
-
-</Grid>
-
-
-{/* =================================================
-    MAINTENANCE ROOMS
-================================================= */}
-
-<Grid
-    item
-    xs={12}
-    sm={6}
-    md={4}
->
-
-    <Card
-        elevation={4}
-        sx={{
-            borderLeft: "6px solid #616161",
-            borderRadius: 3
-        }}
-    >
-
-        <CardContent>
-
-            <Typography
-                variant="h6"
-                color="text.secondary"
-            >
-                Maintenance Rooms
-            </Typography>
-
-            <Typography
-                variant="h3"
-                fontWeight="bold"
-            >
-                {maintenanceRoomCount}
-            </Typography>
-
-        </CardContent>
-
-    </Card>
-
-</Grid>
-
-
-    {/* =================================================
-        PENDING RESERVATIONS
-    ================================================= */}
-
-    <Grid
-        item
-        xs={12}
-        sm={6}
-        md={4}
-    >
-
-        <Card
-            elevation={4}
-            sx={{
-                borderLeft: "6px solid #ed6c02",
-                borderRadius: 3
-            }}
-        >
-
-            <CardContent>
-
-                <Typography
-                    variant="h6"
-                    color="text.secondary"
+                <CardContent
+                    sx={{
+                        py: 3
+                    }}
                 >
-                    Pending Reservations
-                </Typography>
 
-                <Typography
-                    variant="h3"
-                    fontWeight="bold"
-                >
-                    {pendingReservationCount}
-                </Typography>
+                    <Stack
+                        direction={{
+                            xs: "column",
+                            sm: "row"
+                        }}
+                        spacing={2}
+                        alignItems={{
+                            xs: "flex-start",
+                            sm: "center"
+                        }}
+                        justifyContent="space-between"
+                    >
 
-            </CardContent>
+                        <Box>
 
-        </Card>
+                            <Typography
+                                variant="body1"
+                                color="text.secondary"
+                            >
+                                Total Revenue
+                            </Typography>
 
-    </Grid>
+
+                            <Typography
+                                variant="h3"
+                                fontWeight="bold"
+                                sx={{
+                                    color: "#6a1b9a"
+                                }}
+                            >
+                                € {Number(totalRevenue).toFixed(2)}
+                            </Typography>
+
+                        </Box>
 
 
-    {/* =================================================
-        CONFIRMED RESERVATIONS
-    ================================================= */}
+                        <Avatar
+                            sx={{
+                                width: 64,
+                                height: 64,
+                                backgroundColor: "#f3e5f5",
+                                color: "#6a1b9a"
+                            }}
+                        >
 
-    <Grid
-        item
-        xs={12}
-        sm={6}
-        md={4}
-    >
+                            <PaidIcon
+                                sx={{
+                                    fontSize: 36
+                                }}
+                            />
 
-        <Card
-            elevation={4}
-            sx={{
-                borderLeft: "6px solid #0288d1",
-                borderRadius: 3
-            }}
-        >
+                        </Avatar>
 
-            <CardContent>
+                    </Stack>
 
-                <Typography
-                    variant="h6"
-                    color="text.secondary"
-                >
-                    Confirmed Reservations
-                </Typography>
+                </CardContent>
 
-                <Typography
-                    variant="h3"
-                    fontWeight="bold"
-                >
-                    {confirmedReservationCount}
-                </Typography>
+            </Card>
 
-            </CardContent>
 
-        </Card>
-
-    </Grid>
-
-    {/* =================================================
-    COMPLETED RESERVATIONS
-================================================= */}
-
-<Grid
-    item
-    xs={12}
-    sm={6}
-    md={4}
->
-
-    <Card
-        elevation={4}
-        sx={{
-            borderLeft: "6px solid #2e7d32",
-            borderRadius: 3
-        }}
-    >
-
-        <CardContent>
+            {/* =================================================
+                OPERATIONAL STATISTICS
+            ================================================= */}
 
             <Typography
-                variant="h6"
-                color="text.secondary"
-            >
-                Completed Reservations
-            </Typography>
-
-            <Typography
-                variant="h3"
-                fontWeight="bold"
-            >
-                {completedReservationCount}
-            </Typography>
-
-        </CardContent>
-
-    </Card>
-
-</Grid>
-
-
-{/* =================================================
-    CANCELLED RESERVATIONS
-================================================= */}
-
-<Grid
-    item
-    xs={12}
-    sm={6}
-    md={4}
->
-
-    <Card
-        elevation={4}
-        sx={{
-            borderLeft: "6px solid #c62828",
-            borderRadius: 3
-        }}
-    >
-
-        <CardContent>
-
-            <Typography
-                variant="h6"
-                color="text.secondary"
-            >
-                Cancelled Reservations
-            </Typography>
-
-            <Typography
-                variant="h3"
-                fontWeight="bold"
-            >
-                {cancelledReservationCount}
-            </Typography>
-
-        </CardContent>
-
-    </Card>
-
-</Grid>
-
-
-    {/* =================================================
-        TOTAL REVENUE
-    ================================================= */}
-
-    <Grid
-        item
-        xs={12}
-        sm={6}
-        md={4}
-    >
-
-        <Card
-            elevation={4}
-            sx={{
-                borderLeft: "6px solid #6a1b9a",
-                borderRadius: 3
-            }}
-        >
-
-            <CardContent>
-
-                <Typography
-                    variant="h6"
-                    color="text.secondary"
-                >
-                    Total Revenue
-                </Typography>
-
-                <Typography
-                    variant="h3"
-                    fontWeight="bold"
-                >
-                    € {Number(totalRevenue).toFixed(2)}
-                </Typography>
-
-            </CardContent>
-
-        </Card>
-
-    </Grid>
-
-</Grid>
-
-{/* =================================================
-    DASHBOARD CHARTS
-================================================= */}
-
-<Typography
-    variant="h5"
-    fontWeight="bold"
-    sx={{
-        mt: 5,
-        mb: 2
-    }}
->
-    Dashboard Charts
-</Typography>
-
-
-<Grid
-    container
-    spacing={3}
->
-
-    {/* =================================================
-        RESERVATIONS BY STATUS
-    ================================================= */}
-
-    <Grid
-        item
-        xs={12}
-        md={6}
-    >
-
-        <Card
-            elevation={4}
-            sx={{
-                borderRadius: 3,
-                p: 2,
-                height: "100%"
-            }}
-        >
-
-            <Typography
-                variant="h6"
+                variant="h5"
                 fontWeight="bold"
                 sx={{
+                    mt: 5,
                     mb: 2
                 }}
             >
-                Reservations by Status
+                Operational Statistics
             </Typography>
 
-            <Box
-    sx={{
-        width: "100%",
-        overflow: "hidden"
-    }}
->
 
-            <PieChart
-                series={[
-                    {
-                        data: [
-                            {
-                                id: 0,
-                                value: pendingReservationCount,
-                                label: "Pending"
-                            },
-                            {
-                                id: 1,
-                                value: confirmedReservationCount,
-                                label: "Confirmed"
-                            },
-                            {
-                                id: 2,
-                                value: completedReservationCount,
-                                label: "Completed"
-                            },
-                            {
-                                id: 3,
-                                value: cancelledReservationCount,
-                                label: "Cancelled"
-                            }
-                        ],
+            <Grid
+                container
+                spacing={3}
+            >
 
-                        innerRadius: 40,
-                        outerRadius: 100,
-                        paddingAngle: 3,
-                        cornerRadius: 4
-                    }
-                ]}
+                {/* =================================================
+                    ROOM STATUS
+                ================================================= */}
 
-                width={500}
-                height={300}
-            />
+                <Grid
+                    item
+                    xs={12}
+                    lg={6}
+                >
 
-            </Box>
+                    <Card
+                        elevation={3}
+                        sx={{
+                            height: "100%",
+                            borderRadius: 3,
+                            p: 1
+                        }}
+                    >
 
-        </Card>
+                        <CardContent>
 
-    </Grid>
+                            <Typography
+                                variant="h6"
+                                fontWeight="bold"
+                                sx={{
+                                    mb: 2
+                                }}
+                            >
+                                Room Status
+                            </Typography>
 
 
-    {/* =================================================
-        ROOMS BY STATUS
-    ================================================= */}
+                            <Grid
+                                container
+                                spacing={2}
+                            >
 
-    <Grid
-        item
-        xs={12}
-        md={6}
-    >
+                                {roomStatistics.map(
+                                    (stat) => (
 
-        <Card
-            elevation={4}
-            sx={{
-                borderRadius: 3,
-                p: 2,
-                height: "100%"
-            }}
-        >
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            sm={6}
+                                            key={stat.title}
+                                        >
+
+                                            <Box
+                                                sx={{
+                                                    p: 2,
+                                                    borderRadius: 2,
+                                                    backgroundColor:
+                                                        stat.background,
+                                                    minHeight: 105,
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent:
+                                                        "space-between"
+                                                }}
+                                            >
+
+                                                <Box>
+
+                                                    <Typography
+                                                        variant="body2"
+                                                        color="text.secondary"
+                                                        fontWeight={600}
+                                                    >
+                                                        {stat.title}
+                                                    </Typography>
+
+
+                                                    <Typography
+                                                        variant="h4"
+                                                        fontWeight="bold"
+                                                        sx={{
+                                                            color:
+                                                                stat.color
+                                                        }}
+                                                    >
+                                                        {stat.value}
+                                                    </Typography>
+
+                                                </Box>
+
+
+                                                <Box
+                                                    sx={{
+                                                        color:
+                                                            stat.color,
+
+                                                        "& .MuiSvgIcon-root":
+                                                        {
+                                                            fontSize: 34
+                                                        }
+                                                    }}
+                                                >
+                                                    {stat.icon}
+                                                </Box>
+
+                                            </Box>
+
+                                        </Grid>
+
+                                    )
+                                )}
+
+                            </Grid>
+
+                        </CardContent>
+
+                    </Card>
+
+                </Grid>
+
+
+                {/* =================================================
+                    RESERVATION STATUS
+                ================================================= */}
+
+                <Grid
+                    item
+                    xs={12}
+                    lg={6}
+                >
+
+                    <Card
+                        elevation={3}
+                        sx={{
+                            height: "100%",
+                            borderRadius: 3,
+                            p: 1
+                        }}
+                    >
+
+                        <CardContent>
+
+                            <Typography
+                                variant="h6"
+                                fontWeight="bold"
+                                sx={{
+                                    mb: 2
+                                }}
+                            >
+                                Reservation Status
+                            </Typography>
+
+
+                            <Grid
+                                container
+                                spacing={2}
+                            >
+
+                                {reservationStatistics.map(
+                                    (stat) => (
+
+                                        <Grid
+                                            item
+                                            xs={12}
+                                            sm={6}
+                                            key={stat.title}
+                                        >
+
+                                            <Box
+                                                sx={{
+                                                    p: 2,
+                                                    borderRadius: 2,
+                                                    backgroundColor:
+                                                        stat.background,
+                                                    minHeight: 105,
+                                                    display: "flex",
+                                                    alignItems: "center",
+                                                    justifyContent:
+                                                        "space-between"
+                                                }}
+                                            >
+
+                                                <Box>
+
+                                                    <Typography
+                                                        variant="body2"
+                                                        color="text.secondary"
+                                                        fontWeight={600}
+                                                    >
+                                                        {stat.title}
+                                                    </Typography>
+
+
+                                                    <Typography
+                                                        variant="h4"
+                                                        fontWeight="bold"
+                                                        sx={{
+                                                            color:
+                                                                stat.color
+                                                        }}
+                                                    >
+                                                        {stat.value}
+                                                    </Typography>
+
+                                                </Box>
+
+
+                                                <Box
+                                                    sx={{
+                                                        color:
+                                                            stat.color,
+
+                                                        "& .MuiSvgIcon-root":
+                                                        {
+                                                            fontSize: 34
+                                                        }
+                                                    }}
+                                                >
+                                                    {stat.icon}
+                                                </Box>
+
+                                            </Box>
+
+                                        </Grid>
+
+                                    )
+                                )}
+
+                            </Grid>
+
+                        </CardContent>
+
+                    </Card>
+
+                </Grid>
+
+            </Grid>
+
+
+            {/* =================================================
+                DASHBOARD CHARTS
+            ================================================= */}
 
             <Typography
-                variant="h6"
+                variant="h5"
                 fontWeight="bold"
                 sx={{
+                    mt: 5,
                     mb: 2
                 }}
             >
-                Rooms by Status
+                Dashboard Charts
             </Typography>
 
-            <Box
-             sx={{
-                width: "100%",
-                 overflow: "hidden"
-             }}
+
+            <Grid
+                container
+                spacing={3}
             >
 
-            <PieChart
-                series={[
-                    {
-                        data: [
-                            {
-                                id: 0,
-                                value: availableRoomCount,
-                                label: "Available"
-                            },
-                            {
-                                id: 1,
-                                value: occupiedRoomCount,
-                                label: "Occupied"
-                            },
-                            {
-                                id: 2,
-                                value: reservedRoomCount,
-                                label: "Reserved"
-                            },
-                            {
-                                id: 3,
-                                value: maintenanceRoomCount,
-                                label: "Maintenance"
-                            }
-                        ],
+                {/* =================================================
+                    RESERVATIONS BY STATUS
+                ================================================= */}
 
-                        innerRadius: 40,
-                        outerRadius: 100,
-                        paddingAngle: 3,
-                        cornerRadius: 4
-                    }
-                ]}
+                <Grid
+                    item
+                    xs={12}
+                    md={6}
+                >
 
-                width={500}
-                height={300}
-            />
+                    <Card
+                        elevation={3}
+                        sx={{
+                            borderRadius: 3,
+                            height: "100%"
+                        }}
+                    >
 
-            </Box>
+                        <CardContent>
 
-        </Card>
+                            <Typography
+                                variant="h6"
+                                fontWeight="bold"
+                            >
+                                Reservations by Status
+                            </Typography>
 
-    </Grid>
 
-</Grid>
+                            <Typography
+                                variant="body2"
+                                color="text.secondary"
+                                sx={{
+                                    mb: 2
+                                }}
+                            >
+                                Distribution of reservation statuses
+                            </Typography>
+
+
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    overflow: "hidden"
+                                }}
+                            >
+
+                                <PieChart
+                                    series={[
+                                        {
+                                            data: [
+                                                {
+                                                    id: 0,
+                                                    value:
+                                                        pendingReservationCount,
+                                                    label: "Pending",
+                                                    color: "#ed6c02"
+                                                },
+                                                {
+                                                    id: 1,
+                                                    value:
+                                                        confirmedReservationCount,
+                                                    label: "Confirmed",
+                                                    color: "#2e7d32"
+                                                },
+                                                {
+                                                    id: 2,
+                                                    value:
+                                                        completedReservationCount,
+                                                    label: "Completed",
+                                                    color: "#0288d1"
+                                                },
+                                                {
+                                                    id: 3,
+                                                    value:
+                                                        cancelledReservationCount,
+                                                    label: "Cancelled",
+                                                    color: "#c62828"
+                                                }
+                                            ],
+
+                                            innerRadius: 45,
+                                            outerRadius: 100,
+                                            paddingAngle: 3,
+                                            cornerRadius: 5
+                                        }
+                                    ]}
+
+                                    width={500}
+                                    height={300}
+                                />
+
+                            </Box>
+
+                        </CardContent>
+
+                    </Card>
+
+                </Grid>
+
+
+                {/* =================================================
+                    ROOMS BY STATUS
+                ================================================= */}
+
+                <Grid
+                    item
+                    xs={12}
+                    md={6}
+                >
+
+                    <Card
+                        elevation={3}
+                        sx={{
+                            borderRadius: 3,
+                            height: "100%"
+                        }}
+                    >
+
+                        <CardContent>
+
+                            <Typography
+                                variant="h6"
+                                fontWeight="bold"
+                            >
+                                Rooms by Status
+                            </Typography>
+
+
+                            <Typography
+                                variant="body2"
+                                color="text.secondary"
+                                sx={{
+                                    mb: 2
+                                }}
+                            >
+                                Current room availability overview
+                            </Typography>
+
+
+                            <Box
+                                sx={{
+                                    width: "100%",
+                                    display: "flex",
+                                    justifyContent: "center",
+                                    overflow: "hidden"
+                                }}
+                            >
+
+                                <PieChart
+                                    series={[
+                                        {
+                                            data: [
+                                                {
+                                                    id: 0,
+                                                    value:
+                                                        availableRoomCount,
+                                                    label: "Available",
+                                                    color: "#2e7d32"
+                                                },
+                                                {
+                                                    id: 1,
+                                                    value:
+                                                        occupiedRoomCount,
+                                                    label: "Occupied",
+                                                    color: "#d32f2f"
+                                                },
+                                                {
+                                                    id: 2,
+                                                    value:
+                                                        reservedRoomCount,
+                                                    label: "Reserved",
+                                                    color: "#ed6c02"
+                                                },
+                                                {
+                                                    id: 3,
+                                                    value:
+                                                        maintenanceRoomCount,
+                                                    label: "Maintenance",
+                                                    color: "#616161"
+                                                }
+                                            ],
+
+                                            innerRadius: 45,
+                                            outerRadius: 100,
+                                            paddingAngle: 3,
+                                            cornerRadius: 5
+                                        }
+                                    ]}
+
+                                    width={500}
+                                    height={300}
+                                />
+
+                            </Box>
+
+                        </CardContent>
+
+                    </Card>
+
+                </Grid>
+
+            </Grid>
 
         </Box>
 
